@@ -1,0 +1,5 @@
+PRINT "Please enter the week number and press enter"
+PRINT "Please enter your employee ID and press enter"
+PRINT "Please enter your full name and press enter"
+PRINT "Please enter the hours worked for each day this week, separated by commas, then press enter"
+Add all the data to a line
