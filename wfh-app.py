@@ -7,30 +7,28 @@ def Menu():
         print("""Welcome to WFH Hours Tracker
 Please choose from the following options:
 
-+------------------+
-| Menu             |
-|==================|
-| (h) Log hours    |
-| (r) Print Report |
-| (q) Quit         |
-+------------------+
++----------------+
+ Menu
++----------------+
+ [h] Log Hours
+ [r] Print Report
+ [q] Quit
       """)
         options = input("Enter selection: ")
-        print("+-----------------+")
 
         if options == 'h':
             Submit_Hours()
         elif options == 'r':
             Create_Report()
         elif options == 'q':
-            print("Cheerio.")
+            print("\nCheerio. \n")
             break
         else:
             print("Please enter a valid selection.")
 
 
 def Submit_Hours():
-    min_daily_hours = 4
+    min_daily_hours = 6
     max_daily_hours = 9
     min_weekly_hours = 32
     max_weekly_hours = 40
@@ -56,36 +54,35 @@ def Submit_Hours():
         "Employee 3": 0,
         "Employee 4": 0,
         "Employee 5": 0,
+        "Employee 6": 0,
         "Employee 7": 0,
         }
 
     for employee_count, employee_number in enumerate(weekly_report):
         print()
         print()
-        print("==============================================")
-        print("Enter details of Employee", employee_count + 1)
-        print("==============================================")
-        worked_hours["WeekNumber"] = "week " + \
-            str(input("Enter the current working week number >> "))
+        print("+---------------------------+")
+        print(" Enter details of Employee", employee_count + 1)
+        print("+---------------------------+")
+        worked_hours["WeekNumber"] = "Week " + \
+            str(input("\nCurrent working week number >> "))
         print()
-        worked_hours["EmployeeID"] = str(input("Enter the Employee ID >> "))
+        worked_hours["EmployeeID"] = str(input("Employee ID >> "))
         print()
         worked_hours["EmployeeName"] = str(
-            input("Enter the employee name >> "))
-        print("----------------------------------------------")
+            input("Employee's name >> "))
         print()
 
-        print("==============================================")
-        print("Enter hours per day for employee ",
+        print("+----------------------------------+")
+        print(" Enter hours per day for employee",
               worked_hours["EmployeeName"])
-        print("==============================================")
+        print("+----------------------------------+")
 
         for count, Day in enumerate(worked_hours):
             if count >= starting_day:
-                print("Enter employee hours worked on ", Day, " >> ", end='')
-                worked_hours[Day] = str(input())
                 print()
-        print("----------------------------------------------")
+                print("Hours worked on", Day, ">> ", end='')
+                worked_hours[Day] = str(input())
         print()
         ID_name_week_for_heading = "ID: "
         ID_name_week_for_heading = ID_name_week_for_heading + \
@@ -97,9 +94,9 @@ def Submit_Hours():
         ID_name_week_for_heading = ID_name_week_for_heading + \
             worked_hours["WeekNumber"]
 
-        print("==============================================")
-        print("Summary for Employee", ID_name_week_for_heading)
-        print("==============================================")
+        print("+-----------------------------------------+")
+        print(" Summary for Employee", ID_name_week_for_heading)
+        print("+-----------------------------------------+")
         day_within_limits_flag = 0
 
         total_hours = 0
@@ -130,11 +127,10 @@ def Submit_Hours():
                   "must have been as crook as Rookwood in", worked_hours["WeekNumber"])
         elif total_hours > max_weekly_hours:
             print(worked_hours["EmployeeName"],
-                  "was busier than a one armed monkey with two bananas", worked_hours["WeekNumber"])
+                  "was busier than a one armed monkey with two bananas in", worked_hours["WeekNumber"])
         else:
             print(worked_hours["EmployeeName"], "made a bird of it.")
 
-        print("----------------------------------------------")
         print()
         file_csv_out = "DailyHours_DB.csv"
 
@@ -162,14 +158,14 @@ def Submit_Hours():
             pass
 
 # Part E)
-    print("=================================================")
-    print("Weekly Employee Report")
-    print("=================================================")
+    print("+----------------------+")
+    print(" Weekly Employee Report")
+    print("+----------------------+")
     print(insufficient_hours, "employees were watching the paint dry")
     print(excessive_hours, "employees worked more than 40 hours a week")
     print(appropriate_hours,
           "employees worked between 30-40 hours a week")
-    print("-------------------------------------------------")
+
     print()
     input("Press [Enter] to return to the MENU...")
 
@@ -188,12 +184,13 @@ def Create_Report():
 
                 buffer_list = buffer.split(',')
                 csv_list.append(buffer_list)
-
-        print("==============================================")
-        print("Worked Hours Report")
+        print()
+        print("+-------------------+")
+        print(" Worked Hours Report")
+        print("+-------------------+")
+        print()
         options = input('How many reports would you like to display >> ')
-        print("----------------------------------------------")
-
+        print()
         if len(csv_list) < int(options):
             int_rep_number = len(csv_list)
         else:
@@ -208,7 +205,7 @@ def Create_Report():
                 print(csv_list[i][j], end=" ")
 
             print()
-
+        print()
         input("Press [Enter] to return to the MENU...")
         return None
 
@@ -218,6 +215,5 @@ def Create_Report():
         print("to start the data entry.")
         input("Press [Enter] to return to the MENU...")
         return None
-
 
 Menu()
